@@ -1,18 +1,24 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
 const constants = require('./utils/constants');
-const port = constants.port;
+const port = 8080;
 
-const models = require("./models");
+const cors = require('cors');
+app.use(cors());
+
 //Sync Database
+const models = require("./models");
 models.sequelize.sync().then(function() {
     console.log('Database is synced')
 }).catch(function(err) {
     console.log(err)
 });
 
-app.use(cors());
+
+// routes
+const profileService = require('./services/profile');
+const profileRoute = require('./routes/profile')(profileService);
+app.use('/api/profile', profileRoute);
 
 // index path
 app.get('/', function(_, res){
