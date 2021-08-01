@@ -47,7 +47,7 @@ module.exports = function(sequelize, Sequelize) {
             allowNull: true,
         },
         totalExperience: {
-            type: Sequelize.NUMBER,
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
         profileImageURL: {
@@ -79,11 +79,11 @@ module.exports = function(sequelize, Sequelize) {
             allowNull: true,
         },
         profileSummary: {
-            type: Sequelize.STRING(350),
+            type: Sequelize.STRING,
             allowNull: true,
         },
         profileTagLine: {
-            type: Sequelize.STRING(100),
+            type: Sequelize.STRING,
             allowNull: true,
         },
         companyEmail: {
@@ -91,7 +91,7 @@ module.exports = function(sequelize, Sequelize) {
             allowNull: true,
         },
         status: {
-            type: Sequelize.NUMBER,
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
     },{
