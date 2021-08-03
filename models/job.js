@@ -1,102 +1,102 @@
 module.exports = function(sequelize, Sequelize) {
-    var ProfileSchema = sequelize.define('Profile', {
+    var JobSchema = sequelize.define('Job', {
         id: {
             type: Sequelize.UUID,
             primaryKey: true,
             defaultValue: Sequelize.UUIDV4,
             allowNull: false,
         },
-        userId: {
+        description: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        emailId: {
+        title: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        contactNo: {
+        companyId: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        firstName: {
+        travelOption: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+        },
+        jobDuration: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        remote: {
+            type: Sequelize.BOOLEAN,
+            allowNull: true,
+        },
+        visaId: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        lat: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        middleName: {
+        long: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        lastName: {
+        paidType: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        gender: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        roleTag: {
-            type: Sequelize.STRING,
-            allowNull: false,
-        },
-        resumeURL: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        dob: {
-            type: Sequelize.DATE,
-            allowNull: true,
-        },
-        totalExperience: {
+        minPaidAmount: {
             type: Sequelize.INTEGER,
             allowNull: true,
         },
-        profileImageURL: {
+        maxPaidAmount: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+        },
+        minExperienceRequired: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        jobTitleId: {
-            type: Sequelize.UUID,
-            allowNull: true,
-        },
-        location: {
+        maxExperienceRequired: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        currentCTC: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        visaIds: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        socialMediaURLs: {
+        jobTypeId: {
             type: Sequelize.STRING,
             allowNull: true,
         },
         industryId: {
-            type: Sequelize.UUID,
-            allowNull: true,
-        },
-        profileSummary: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        profileTagLine: {
+        primarySkills: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        companyEmail: {
+        secondarySkills: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        noPositions: {
             type: Sequelize.STRING,
             allowNull: true,
         },
         status: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        createdBy: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        updatedAt: {
+            type: Sequelize.STRING,
             allowNull: true,
         },
     },{
         paranoid: true,
         timestamps: true,
     });
-    return ProfileSchema;
+    return JobSchema;
 }
