@@ -4,8 +4,9 @@ authenticate = async function (req, res, next) {
     try {
         if (req.headers["authorization"]) {
             const token = req.headers["authorization"].split(' ')[1];
-            const decodeVal = admin.auth().verifyIdToken(token);
+            const decodeVal = await admin.auth().verifyIdToken(token);
             if (decodeVal) {
+                req.body.user = decodeVal;
                 return next();
             }
         }        
