@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var EducationSchema = sequelize.define('Education', {
         id: {

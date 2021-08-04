@@ -1,3 +1,4 @@
+
 module.exports = function(sequelize, Sequelize) {
     var WorkDetailsSchema = sequelize.define('WorkDetails', {
         id: {

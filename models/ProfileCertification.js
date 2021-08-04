@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var ProfileCertificationSchema = sequelize.define('ProfileCertification', {
         id: {

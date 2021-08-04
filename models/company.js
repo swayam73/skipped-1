@@ -1,3 +1,4 @@
+
 module.exports = function(sequelize, Sequelize) {
     var CompanySchema = sequelize.define('Company', {
         id: {

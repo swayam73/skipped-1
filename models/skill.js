@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var SkillSchema = sequelize.define('Skill', {
         id: {

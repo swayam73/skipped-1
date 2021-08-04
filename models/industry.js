@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var IndustrySchema = sequelize.define('Industry', {
         id: {

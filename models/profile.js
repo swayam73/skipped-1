@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var ProfileSchema = sequelize.define('Profile', {
         id: {

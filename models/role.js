@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var RoleSchema = sequelize.define('Role', {
         id: {

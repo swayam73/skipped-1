@@ -1,5 +1,3 @@
-
-
 module.exports = function(sequelize, Sequelize) {
     var PermissionSchema = sequelize.define('Permission', {
         id: {

@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var CertificationSchema = sequelize.define('Certification', {
         id: {

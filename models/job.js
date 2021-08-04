@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var JobSchema = sequelize.define('Job', {
         id: {

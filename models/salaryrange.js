@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var SalaryRangeSchema = sequelize.define('SalaryRange', {
         id: {

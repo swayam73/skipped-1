@@ -1,3 +1,4 @@
+
 module.exports = function(sequelize, Sequelize) {
     var VisaTypeSchema = sequelize.define('VisaType', {
         id: {

@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, Sequelize) {
     var CompanyTypeSchema = sequelize.define('CompanyType', {
         id: {
