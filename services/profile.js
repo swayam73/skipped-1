@@ -18,8 +18,7 @@ const getProfile = async (req,res,_) => {
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({message: "Error while getting profile.", description: error.message});
-    }
-    
+    }  
 }
 
 const postProfile = async (req,res,_) => {

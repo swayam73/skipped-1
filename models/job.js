@@ -90,10 +90,6 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        updatedAt: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
     },{
         paranoid: true,
         timestamps: true,

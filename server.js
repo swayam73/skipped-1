@@ -15,8 +15,8 @@ models.sequelize.sync().then(function() {
 });
 
 // authenticate user
-// const authentication = require('./middlewares/authentication');
-// app.use(authentication);
+const authentication = require('./middlewares/authentication');
+app.use(authentication);
 
 // profile
 const profileService = require('./services/profile');
@@ -28,6 +28,10 @@ const roleService = require('./services/role');
 const roleRoute = require('./routes/role')(roleService);
 app.use('/api/role', roleRoute);
 
+// job
+const jobService = require('./services/job');
+const jobRoute = require('./routes/job')(jobService);
+app.use('/api/job', jobRoute);
 
 // index path
 app.get('/', function(_, res){
