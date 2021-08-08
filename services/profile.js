@@ -24,6 +24,7 @@ const getProfile = async (req,res,_) => {
 
 const postProfile = async (req,res,_) => {
     try {
+        delete req.body.id;
         req.body.userId = req.body.user.uid;
         const profile = await Profile.create(req.body);
         return res.json(profile);

@@ -15,13 +15,19 @@ models.sequelize.sync().then(function() {
 });
 
 // authenticate user
-const authentication = require('./middlewares/authentication');
-app.use(authentication);
+// const authentication = require('./middlewares/authentication');
+// app.use(authentication);
 
-// routes
+// profile
 const profileService = require('./services/profile');
 const profileRoute = require('./routes/profile')(profileService);
 app.use('/api/profile', profileRoute);
+
+// role
+const roleService = require('./services/role');
+const roleRoute = require('./routes/role')(roleService);
+app.use('/api/role', roleRoute);
+
 
 // index path
 app.get('/', function(_, res){
