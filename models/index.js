@@ -1,9 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
+const constants = require('../utils/constants');
 
 const sequelize = new Sequelize('skipped', 'root', 'admin', {
-    host: '127.0.0.1',
+    host: constants.DB_HOST,
     dialect: 'mysql',
     operatorsAliases: false,
     logging: false,

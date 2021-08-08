@@ -1,25 +1,43 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
-const constants = require('./utils/constants');
-const port = constants.port;
+const port = 8080;
 
-const models = require("./models");
+const cors = require('cors');
+app.use(cors());
+app.use(express.json({limit: '10mb', extended: true}))
+app.use(express.urlencoded({limit: '10mb', extended: true}))
 //Sync Database
+const models = require("./models");
 models.sequelize.sync().then(function() {
-    console.log('Database is synced')
-}).catch(function(err) {
-    console.log(err)
+    console.info('Database is synced')
+}).catch(function(error) {
+    console.error(error)
 });
 
-app.use(cors());
+// authenticate user
+const authentication = require('./middlewares/authentication');
+app.use(authentication);
+
+// profile
+const profileService = require('./services/profile');
+const profileRoute = require('./routes/profile')(profileService);
+app.use('/api/profile', profileRoute);
+
+// role
+const roleService = require('./services/role');
+const roleRoute = require('./routes/role')(roleService);
+app.use('/api/role', roleRoute);
+
+// job
+const jobService = require('./services/job');
+const jobRoute = require('./routes/job')(jobService);
+app.use('/api/job', jobRoute);
 
 // index path
 app.get('/', function(_, res){
-    console.log('app listening on port: '+port);
     res.send('Skipped API running successfully.')
 });
 
 app.listen(port, function(){
-    console.log('Skipped API started on - ' + port);
+    console.info('Skipped API started on - ' + port);
 });

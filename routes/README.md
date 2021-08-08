@@ -1,1 +1,0 @@
-Request should be authorized and send to service handler method from here.
