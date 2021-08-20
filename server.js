@@ -33,6 +33,11 @@ const jobService = require('./services/job');
 const jobRoute = require('./routes/job')(jobService);
 app.use('/api/job', jobRoute);
 
+// job application
+const jobApplicationService = require('./services/jobApplication');
+const jobApplicationRoute = require('./routes/jobApplication')(jobApplicationService);
+app.use('/api/jobApplication', jobApplicationRoute);
+
 // index path
 app.get('/', function(_, res){
     res.send('Skipped API running successfully.')

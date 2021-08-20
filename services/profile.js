@@ -3,7 +3,7 @@ const Profile = require('../models').Profile;
 
 const getProfiles = async (req,res,_) => {
     try {
-        const profiles = await Profile.findAll({where: {userId: req.body.user.uid}});
+        const profiles = await Profile.findAll({where: {userId: req.body.user.user_id}, order: [['updatedAt', 'DESC']]});
         return res.json(profiles);
     } catch (error) {
         console.error(error.message);
@@ -13,7 +13,8 @@ const getProfiles = async (req,res,_) => {
 
 const getProfile = async (req,res,_) => {
     try {
-        const profile = await Profile.findOne({ where: { id: req.params.id, userId: req.body.user.uid } });
+        const profile = await Profile.findOne({ where: { id: req.params.id, userId: req.body.user.uid } , raw: true});
+        await Profile.upsert(profile);
         return res.json(profile);
     } catch (error) {
         console.error(error.message);
