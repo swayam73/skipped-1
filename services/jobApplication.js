@@ -1,5 +1,6 @@
 
 const JobApplication = require('../models').JobApplication;
+const Job = require('../models').Job;
 const constants = require('../utils/constants').constants;
 
 const getJobApplications = async (req,res,_) => {
@@ -35,17 +36,17 @@ const getJobApplication = async (req,res,_) => {
     try {
         let jobApplication;
         if (req.body.profile.roleTag === constants.ROLE_TAGS.RECRUITER) {
-            jobApplication = await JobApplication.findOne({ where: { id: req.query.id, jobCreatedBy: req.body.profile.id }, raw: true });
+            jobApplication = await JobApplication.findOne({ where: { id: req.params.id, jobCreatedBy: req.body.profile.id }, raw: true });
             if (!job) {
                 return res.status(403).json({message: "Cannot find job application for provided id.", description: "Job application not found for given profile."});
             }
         } else if (req.body.profile.roleTag === constants.ROLE_TAGS.CANDIDATE) {
-            jobApplication = await JobApplication.findOne({ where: { id: req.query.id, appliedBy: req.body.profile.id }, raw: true });
+            jobApplication = await JobApplication.findOne({ where: { id: req.params.id, appliedBy: req.body.profile.id }, raw: true });
             if (!jobApplication) {
                 return res.status(403).json({message: "Cannot find job application for provided id.", description: "Job application not found for given profile."});
             }
         } else {
-            jobApplication = await JobApplication.findOne({ where: { id: req.query.id }, raw: true });
+            jobApplication = await JobApplication.findOne({ where: { id: req.params.id }, raw: true });
             if (!jobApplication) {
                 return res.status(403).json({message: "Invalid job application.", description: "Job application id is invalid."});
             }
