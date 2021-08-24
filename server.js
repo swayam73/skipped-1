@@ -1,48 +1,99 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = 8080;
 
-const cors = require('cors');
+const cors = require("cors");
 app.use(cors());
-app.use(express.json({limit: '10mb', extended: true}))
-app.use(express.urlencoded({limit: '10mb', extended: true}))
+app.use(express.json({ limit: "10mb", extended: true }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 //Sync Database
 const models = require("./models");
-models.sequelize.sync().then(function() {
-    console.info('Database is synced')
-}).catch(function(error) {
-    console.error(error)
-});
+models.sequelize
+  .sync()
+  .then(function () {
+    console.info("Database is synced");
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
 
 // authenticate user
-const authentication = require('./middlewares/authentication');
+const authentication = require("./middlewares/authentication");
 app.use(authentication);
 
 // profile
-const profileService = require('./services/profile');
-const profileRoute = require('./routes/profile')(profileService);
-app.use('/api/profile', profileRoute);
+const profileService = require("./services/profile");
+const profileRoute = require("./routes/profile")(profileService);
+app.use("/api/profile", profileRoute);
 
 // role
-const roleService = require('./services/role');
-const roleRoute = require('./routes/role')(roleService);
-app.use('/api/role', roleRoute);
+const roleService = require("./services/role");
+const roleRoute = require("./routes/role")(roleService);
+app.use("/api/role", roleRoute);
 
 // job
-const jobService = require('./services/job');
-const jobRoute = require('./routes/job')(jobService);
-app.use('/api/job', jobRoute);
+const jobService = require("./services/job");
+const jobRoute = require("./routes/job")(jobService);
+app.use("/api/job", jobRoute);
 
 // job application
-const jobApplicationService = require('./services/jobApplication');
-const jobApplicationRoute = require('./routes/jobApplication')(jobApplicationService);
-app.use('/api/jobApplication', jobApplicationRoute);
+const jobApplicationService = require("./services/jobApplication");
+const jobApplicationRoute = require("./routes/jobApplication")(
+  jobApplicationService
+);
+app.use("/api/jobApplication", jobApplicationRoute);
+
+// experience
+const experienceService = require("./services/experience");
+const experienceRoute = require("./routes/experience")(experienceService);
+app.use("/api/experience", experienceRoute);
+
+// JobTypes
+const jobtypeService = require("./services/jobtype");
+const jobtypeRoute = require("./routes/jobtype")(jobtypeService);
+app.use("/api/jobtype", jobtypeRoute);
+
+// salaryrange
+const salaryRangeService = require("./services/salaryrange");
+const salaryRangeRoute = require("./routes/salaryrange")(salaryRangeService);
+app.use("/api/salaryrange", salaryRangeRoute);
+
+// travelOption
+const travelOptionsService = require("./services/travelOptions");
+const travelOptionRangeRoute = require("./routes/travelOptions")(
+  travelOptionsService
+);
+app.use("/api/traveloptions", travelOptionRangeRoute);
+
+// industry
+const industryService = require("./services/industry");
+const industryangeRoute = require("./routes/industry")(industryService);
+app.use("/api/industry", industryangeRoute);
+
+// education
+const educationService = require("./services/education");
+const educationRoute = require("./routes/education")(educationService);
+app.use("/api/education", educationRoute);
+
+// Internship Duration
+const internshipDurationService = require("./services/internshipDuration");
+const internshipDurationRoute = require("./routes/internshipDuration")(
+  internshipDurationService
+);
+app.use("/api/internshipduration", internshipDurationRoute);
+
+// Company Status
+const companyStatusService = require("./services/companyStatus");
+const companyStatusRoute = require("./routes/companyStatus")(
+  companyStatusService
+);
+app.use("/api/companystatus", companyStatusRoute);
 
 // index path
-app.get('/', function(_, res){
-    res.send('Skipped API running successfully.')
+app.get("/", function (_, res) {
+  res.send("Skipped API running successfully.");
 });
 
-app.listen(port, function(){
-    console.info('Skipped API started on - ' + port);
+app.listen(port, function () {
+  console.info("Skipped API started on - " + port);
 });
