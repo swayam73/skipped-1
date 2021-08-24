@@ -2,10 +2,10 @@ const Profile = require('../models').Profile;
 
 const getProfile = async (req,res,next) => {
     try {
-        if (!req.query.profileId) {
-            return res.status(403).json({message: "ProfileId is required.", description: "Missing profile Id in query param"});
+        if (!req.headers["profileid"]) {
+            return res.status(403).json({message: "ProfileId is required.", description: "Missing profile Id in headers"});
         }
-        const profile = await Profile.findOne({ where: { id: req.query.profileId, userId: req.body.user.uid }, raw: true });
+        const profile = await Profile.findOne({ where: { id: req.headers["profileid"], userId: req.body.user.uid }, raw: true });
         if (!profile) {
             return res.status(403).json({message: "Profile Id is invalid.", description: "Profile Id is not valid"});
         }

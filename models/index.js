@@ -37,3 +37,5 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+db.JobApplication.belongsTo(db.Job, { foreignKey: "jobId", as: "job" });

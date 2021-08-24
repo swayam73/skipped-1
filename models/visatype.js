@@ -13,14 +13,14 @@ module.exports = function(sequelize, Sequelize) {
         },
         description: {
             type: Sequelize.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         status: {
             type: Sequelize.STRING,
             allowNull: false,
         },
     },{
-        paranoid: false,
+        paranoid: true,
         timestamps: true,
     });
     return VisaTypeSchema;

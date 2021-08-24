@@ -89,6 +89,11 @@ const companyStatusRoute = require("./routes/companyStatus")(
 );
 app.use("/api/companystatus", companyStatusRoute);
 
+// visa type
+const visaTypeService = require('./services/visaType');
+const visaTypeRoute = require('./routes/visaType')(visaTypeService);
+app.use('/api/visaType', visaTypeRoute);
+
 // index path
 app.get("/", function (_, res) {
   res.send("Skipped API running successfully.");
