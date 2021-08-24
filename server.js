@@ -38,6 +38,11 @@ const jobApplicationService = require('./services/jobApplication');
 const jobApplicationRoute = require('./routes/jobApplication')(jobApplicationService);
 app.use('/api/jobApplication', jobApplicationRoute);
 
+// visa type
+const visaTypeService = require('./services/visaType');
+const visaTypeRoute = require('./routes/visaType')(visaTypeService);
+app.use('/api/visaType', visaTypeRoute);
+
 // index path
 app.get('/', function(_, res){
     res.send('Skipped API running successfully.')
