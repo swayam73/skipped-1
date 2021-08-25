@@ -13,6 +13,21 @@ const getExperiences = async (req, res, _) => {
   }
 };
 
+const getActiveExperiences = async (req, res, _) => {
+  try {
+    const Experiences = await JobExperience.findAll({
+      where: { status: "Active" },
+    });
+    return res.json(Experiences);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: "Error while getting experience.",
+      description: error.message,
+    });
+  }
+};
+
 const getExperience = async (req, res, _) => {
   try {
     const experience = await JobExperience.findOne({
@@ -82,6 +97,7 @@ const deleteExperience = async (req, res, _) => {
 
 module.exports = {
   getExperiences,
+  getActiveExperiences,
   getExperience,
   postExperience,
   putExperience,

@@ -2,8 +2,23 @@ const InternshipDuration = require("../models").InternshipDuration;
 
 const getInternshipDurations = async (req, res, _) => {
   try {
-    const Experiences = await InternshipDuration.findAll();
-    return res.json(Experiences);
+    const InternshipDurations = await InternshipDuration.findAll();
+    return res.json(InternshipDurations);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: "Error while getting internshipDuration.",
+      description: error.message,
+    });
+  }
+};
+
+const getActiveInternshipDurations = async (req, res, _) => {
+  try {
+    const InternshipDurations = await InternshipDuration.findAll({
+      where: { status: "Active" },
+    });
+    return res.json(InternshipDurations);
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({
@@ -83,6 +98,7 @@ const deleteInternshipDuration = async (req, res, _) => {
 module.exports = {
   getInternshipDurations,
   getInternshipDuration,
+  getActiveInternshipDurations,
   postInternshipDuration,
   putInternshipDuration,
   deleteInternshipDuration,

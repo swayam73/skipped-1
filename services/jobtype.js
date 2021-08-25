@@ -13,6 +13,21 @@ const getJobTypes = async (req, res, _) => {
   }
 };
 
+const getActiveJobTypes = async (req, res, _) => {
+  try {
+    const JobTypes = await JobType.findAll({
+      where: { status: "Active" },
+    });
+    return res.json(JobTypes);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: "Error while getting jobType.",
+      description: error.message,
+    });
+  }
+};
+
 const getJobType = async (req, res, _) => {
   try {
     const jobType = await JobType.findOne({
@@ -82,6 +97,7 @@ const deleteJobType = async (req, res, _) => {
 
 module.exports = {
   getJobTypes,
+  getActiveJobTypes,
   getJobType,
   postJobType,
   putJobTypes,

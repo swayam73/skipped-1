@@ -13,6 +13,21 @@ const getCompanyStatuses = async (req, res, _) => {
   }
 };
 
+const gettActiveCompanyStatuses = async (req, res, _) => {
+  try {
+    const CompanyStatuses = await CompanyStatus.findAll({
+      where: { status: "Active" },
+    });
+    return res.json(CompanyStatuses);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: "Error while getting companyStatus.",
+      description: error.message,
+    });
+  }
+};
+
 const getCompanyStatus = async (req, res, _) => {
   try {
     const companyStatus = await CompanyStatus.findOne({
@@ -82,6 +97,7 @@ const deleteCompanyStatus = async (req, res, _) => {
 
 module.exports = {
   getCompanyStatuses,
+  gettActiveCompanyStatuses,
   getCompanyStatus,
   postCompanyStatus,
   putCompanyStatus,

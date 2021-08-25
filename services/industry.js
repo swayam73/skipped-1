@@ -13,6 +13,21 @@ const getIndustries = async (req, res, _) => {
   }
 };
 
+const getActiveIndustries = async (req, res, _) => {
+  try {
+    const Industries = await Industry.findAll({
+      where: { status: "Active" },
+    });
+    return res.json(Industries);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: "Error while getting industry.",
+      description: error.message,
+    });
+  }
+};
+
 const getIndustry = async (req, res, _) => {
   try {
     const industry = await Industry.findOne({
@@ -86,4 +101,5 @@ module.exports = {
   postIndustry,
   putIndustry,
   deleteIndustry,
+  getActiveIndustries,
 };

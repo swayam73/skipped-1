@@ -13,6 +13,21 @@ const getEducations = async (req, res, _) => {
   }
 };
 
+const getActiveEducations = async (req, res, _) => {
+  try {
+    const Educations = await Education.findAll({
+      where: { status: "Active" },
+    });
+    return res.json(Educations);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: "Error while getting education.",
+      description: error.message,
+    });
+  }
+};
+
 const getEducation = async (req, res, _) => {
   try {
     const education = await Education.findOne({
@@ -82,6 +97,7 @@ const deleteEducation = async (req, res, _) => {
 
 module.exports = {
   getEducations,
+  getActiveEducations,
   getEducation,
   postEducation,
   putEducation,

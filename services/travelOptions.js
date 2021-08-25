@@ -13,6 +13,21 @@ const getTravelOptions = async (req, res, _) => {
   }
 };
 
+const getActiveTravelOptions = async (req, res, _) => {
+  try {
+    const TravelOptions = await TravelOption.findAll({
+      where: { status: "Active" },
+    });
+    return res.json(TravelOptions);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      message: "Error while getting travelOption.",
+      description: error.message,
+    });
+  }
+};
+
 const getTravelOption = async (req, res, _) => {
   try {
     const travelOption = await TravelOption.findOne({
@@ -82,6 +97,7 @@ const deleteTravelOption = async (req, res, _) => {
 
 module.exports = {
   getTravelOptions,
+  getActiveTravelOptions,
   getTravelOption,
   postTravelOption,
   putTravelOption,
