@@ -12,6 +12,7 @@ const getJobApplications = async (req,res,_) => {
                     where: { jobCreatedBy: req.body.profile.id, jobId: req.query.jobId },
                     include: [ { model: Job, as: 'job' }],
                     raw: true,
+                    nest: true,
                 });
             } else {
                 jobApplication = await JobApplication.findAll({ 
@@ -26,12 +27,14 @@ const getJobApplications = async (req,res,_) => {
                     where: { appliedBy: req.body.profile.id, jobId: req.query.jobId },
                     include: [ { model: Job, as: 'job' }],
                     raw: true,
+                    nest: true,
                 });
             } else {
                 jobApplication = await JobApplication.findAll({ 
                     where: { appliedBy: req.body.profile.id },
                     include: [ { model: Job, as: 'job' }],
                     raw: true,
+                    nest: true,
                 });
             }
         } else {
@@ -40,10 +43,13 @@ const getJobApplications = async (req,res,_) => {
                     where: { jobId: req.query.jobId },
                     include: [ { model: Job, as: 'job' }],
                     raw: true,
+                    nest: true,
                 });
             } else {
                 jobApplication = await JobApplication.findAll({
                     include: [ { model: Job, as: 'job' }],
+                    raw: true,
+                    nest: true,
                 });
             }
         }
@@ -61,6 +67,7 @@ const getJobApplication = async (req,res,_) => {
             jobApplication = await JobApplication.findOne({ 
                 where: { id: req.params.id, jobCreatedBy: req.body.profile.id }, 
                 include: [ { model: Job, as: 'job' }],
+                nest: true,
                 raw: true,
             });
             if (!job) {
@@ -70,6 +77,7 @@ const getJobApplication = async (req,res,_) => {
             jobApplication = await JobApplication.findOne({ 
                 where: { id: req.params.id, appliedBy: req.body.profile.id },
                 include: [ { model: Job, as: 'job' }],
+                nest: true,
                 raw: true });
             if (!jobApplication) {
                 return res.status(403).json({message: "Cannot find job application for provided id.", description: "Job application not found for given profile."});
@@ -78,6 +86,7 @@ const getJobApplication = async (req,res,_) => {
             jobApplication = await JobApplication.findOne({ 
                 where: { id: req.params.id },
                 include: [ { model: Job, as: 'job' }], 
+                nest: true,
                 raw: true,
             });
             if (!jobApplication) {
@@ -113,7 +122,6 @@ const postJobApplication = async (req,res,_) => {
         console.error(error.message);
         return res.status(500).json({message: "Error while applying for job.", description: error.message});
     }
-    
 }
 
 const putJobApplication = async (req,res,_) => {
