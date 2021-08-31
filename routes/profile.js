@@ -6,5 +6,6 @@ module.exports = (profileService) => {
     router.get('/:id', profileService.getProfile);
     router.put('/:id', profileService.putProfile);
     router.delete('/:id', profileService.deleteProfile);
+    router.get('/find', profileService.findProfiles);
     return router;
 };
