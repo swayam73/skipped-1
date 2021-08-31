@@ -93,6 +93,12 @@ const findJobs = async (req, res, _) => {
                 raw: true,
             });
         } else {
+            const appliedJobIds = await JobApplication.findAll({ 
+                where: { appliedBy: req.body.profile.id },
+                attributes: ['jobId'],
+                raw: true,
+            });
+            query.id = { [Op.notIn]: appliedJobIds };
             jobs = await Job.findAll({
                 where: query,
                 order: [['updatedAt', 'DESC']],
