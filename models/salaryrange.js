@@ -1,4 +1,4 @@
-module.exports = function(sequelize, Sequelize) {
+module.exports = function (sequelize, Sequelize) {
     var SalaryRangeSchema = sequelize.define('SalaryRange', {
         id: {
             type: Sequelize.UUID,
@@ -6,11 +6,11 @@ module.exports = function(sequelize, Sequelize) {
             defaultValue: Sequelize.UUIDV4,
             allowNull: false,
         },
-        name: {
+        hValue: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        description: {
+        yValue: {
             type: Sequelize.STRING,
             allowNull: false,
         },
@@ -18,7 +18,7 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.STRING,
             allowNull: false,
         },
-    },{
+    }, {
         paranoid: false,
         timestamps: true,
     });
