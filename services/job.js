@@ -84,20 +84,17 @@ const deleteJob = async (req, res, _) => {
 const findJobs = async (req, res, _) => {
     try {
         let jobs;
+        let query = req.query;
         if (req.body.profile.roleTag === constants.ROLE_TAGS.RECRUITER) {
+            query.createdBy = req.body.profile.id;
             jobs = await Job.findAll({
-                where: {
-                    createdBy: req.body.profile.id,
-                    query
-                },
+                where: query,
                 order: [['updatedAt', 'DESC']],
                 raw: true,
             });
         } else {
             jobs = await Job.findAll({
-                where: {
-                    query
-                },
+                where: query,
                 order: [['updatedAt', 'DESC']],
                 raw: true,
             });
@@ -105,7 +102,7 @@ const findJobs = async (req, res, _) => {
         return res.json(jobs);
     } catch (error) {
         console.error(error.message);
-        return res.status(500).json({ message: "Error while fetching jobs.", description: error.message });
+        return res.status(500).json({ message: "Error while searching jobs.", description: error.message });
     }
 }
 

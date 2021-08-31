@@ -3,11 +3,10 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const constants = require("../utils/constants");
 
-const sequelize = new Sequelize("skipped", "root", "root", {
+const sequelize = new Sequelize("skipped", "root", "admin", {
   host: constants.DB_HOST,
   dialect: "mysql",
-  operatorsAliases: false,
-  logging: false,
+  logging: true,
   benchmark: true,
   pool: {
     max: 50,

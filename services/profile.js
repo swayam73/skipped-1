@@ -1,5 +1,7 @@
 
 const Profile = require('../models').Profile;
+const Op = require("sequelize").Op;
+const constants = require('../utils/constants').constants;
 
 const getProfiles = async (req, res, _) => {
     try {
@@ -65,26 +67,36 @@ const deleteProfile = async (req, res, _) => {
 const findProfiles = async (req, res, _) => {
     try {
         let profiles;
-        const query = req.query;
+        let query = req.query;
+        if (query.visaIds) {
+            query.visaIds = { [Op.like]: query.visaIds };
+        }
+        if (query.primarySkillIds) {
+            query.primarySkillIds = { [Op.like]: query.primarySkillIds };
+        }
+        if (query.secondarySkillIds) {
+            query.secondarySkillIds = { [Op.like]: query.secondarySkillIds };
+        }
+        if (query.industryIds) {
+            query.industryIds = { [Op.like]: query.industryIds };
+        }
         if (req.body.profile.roleTag === constants.ROLE_TAGS.RECRUITER) {
+            query.roleTag = constants.ROLE_TAGS.CANDIDATE;
             profiles = await Profile.findAll({
-                where: {
-                    roleTag: constants.ROLE_TAGS.CANDIDATE, query
-                },
+                where: query,
                 order: [['updatedAt', 'DESC']],
                 raw: true,
             });
         } else if (req.body.profile.roleTag === constants.ROLE_TAGS.CANDIDATE) {
+            query.roleTag = constants.ROLE_TAGS.RECRUITER;
             profiles = await Profile.findAll({
-                where: {
-                    roleTag: constants.ROLE_TAGS.RECRUITER, query
-                },
+                where: query,
                 order: [['updatedAt', 'DESC']],
                 raw: true,
             });
         } else {
             profiles = await Profile.findAll({
-                where: { query },
+                where: query,
                 order: [['updatedAt', 'DESC']],
                 raw: true,
             });
@@ -92,7 +104,7 @@ const findProfiles = async (req, res, _) => {
         return res.json(profiles);
     } catch (error) {
         console.error(error.message);
-        return res.status(500).json({ message: "Error while getting profiles.", description: error.message });
+        return res.status(500).json({ message: "Error while searching profiles.", description: error.message });
     }
 }
 
