@@ -19,6 +19,7 @@ const getJobApplications = async (req,res,_) => {
                     where: { jobCreatedBy: req.body.profile.id },
                     include: [ { model: Job, as: 'job' }],
                     raw: true,
+                    nest: true,
                 });
             }            
         } else if (req.body.profile.roleTag === constants.ROLE_TAGS.CANDIDATE) {
