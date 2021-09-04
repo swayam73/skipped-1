@@ -90,9 +90,19 @@ const companyStatusRoute = require("./routes/companyStatus")(
 app.use("/api/companystatus", companyStatusRoute);
 
 // visa type
-const visaTypeService = require('./services/visaType');
-const visaTypeRoute = require('./routes/visaType')(visaTypeService);
-app.use('/api/visaType', visaTypeRoute);
+const visaTypeService = require("./services/visaType");
+const visaTypeRoute = require("./routes/visaType")(visaTypeService);
+app.use("/api/visaType", visaTypeRoute);
+
+// Skills
+const skillService = require("./services/skill");
+const skillRoute = require("./routes/skill")(skillService);
+app.use("/api/skill", skillRoute);
+
+// Status Code
+const statusCodeService = require("./services/statusCode");
+const statusCodeRoute = require("./routes/statusCode")(statusCodeService);
+app.use("/api/statuscode", statusCodeRoute);
 
 // index path
 app.get("/", function (_, res) {
