@@ -56,12 +56,10 @@ const getJobApplications = async (req, res, _) => {
     return res.json(jobApplication);
   } catch (error) {
     console.error(error.message);
-    return res
-      .status(500)
-      .json({
-        message: "Error while fetching jobs.",
-        description: error.message,
-      });
+    return res.status(500).json({
+      message: "Error while fetching jobs.",
+      description: error.message,
+    });
   }
 };
 
@@ -76,12 +74,10 @@ const getJobApplication = async (req, res, _) => {
         raw: true,
       });
       if (!job) {
-        return res
-          .status(403)
-          .json({
-            message: "Cannot find job application for provided id.",
-            description: "Job application not found for given profile.",
-          });
+        return res.status(403).json({
+          message: "Cannot find job application for provided id.",
+          description: "Job application not found for given profile.",
+        });
       }
     } else if (req.body.profile.roleTag === constants.ROLE_TAGS.CANDIDATE) {
       jobApplication = await JobApplication.findOne({
@@ -91,12 +87,10 @@ const getJobApplication = async (req, res, _) => {
         raw: true,
       });
       if (!jobApplication) {
-        return res
-          .status(403)
-          .json({
-            message: "Cannot find job application for provided id.",
-            description: "Job application not found for given profile.",
-          });
+        return res.status(403).json({
+          message: "Cannot find job application for provided id.",
+          description: "Job application not found for given profile.",
+        });
       }
     } else {
       jobApplication = await JobApplication.findOne({
@@ -106,44 +100,36 @@ const getJobApplication = async (req, res, _) => {
         raw: true,
       });
       if (!jobApplication) {
-        return res
-          .status(403)
-          .json({
-            message: "Invalid job application.",
-            description: "Job application id is invalid.",
-          });
+        return res.status(403).json({
+          message: "Invalid job application.",
+          description: "Job application id is invalid.",
+        });
       }
     }
     return res.json(jobApplication);
   } catch (error) {
     console.error(error.message);
-    return res
-      .status(500)
-      .json({
-        message: "Error while getting job application.",
-        description: error.message,
-      });
+    return res.status(500).json({
+      message: "Error while getting job application.",
+      description: error.message,
+    });
   }
 };
 
 const postJobApplication = async (req, res, _) => {
   try {
     if (req.body.profile.roleTag !== constants.ROLE_TAGS.CANDIDATE) {
-      return res
-        .status(403)
-        .json({
-          message: "Recruiter cannot apply for job.",
-          description: "Job cannot be applied by recruiter.",
-        });
+      return res.status(403).json({
+        message: "Recruiter cannot apply for job.",
+        description: "Job cannot be applied by recruiter.",
+      });
     }
     let job = await Job.findOne({ where: { id: req.body.jobId }, raw: true });
     if (!job) {
-      return res
-        .status(404)
-        .json({
-          message: "Invalid job id.",
-          description: "Job cannot be found for provided job id.",
-        });
+      return res.status(404).json({
+        message: "Invalid job id.",
+        description: "Job cannot be found for provided job id.",
+      });
     }
     delete req.body.id;
     req.body.appliedBy = req.body.profile.id;
@@ -155,36 +141,30 @@ const postJobApplication = async (req, res, _) => {
     return res.json(jobApplication);
   } catch (error) {
     console.error(error.message);
-    return res
-      .status(500)
-      .json({
-        message: "Error while applying for job.",
-        description: error.message,
-      });
+    return res.status(500).json({
+      message: "Error while applying for job.",
+      description: error.message,
+    });
   }
 };
 
 const putJobApplication = async (req, res, _) => {
   try {
     if (req.body.profile.roleTag === constants.ROLE_TAGS.CANDIDATE) {
-      return res
-        .status(403)
-        .json({
-          message: "Candidate cannot update job status.",
-          description: "Job status cannot be updated with candidate only.",
-        });
+      return res.status(403).json({
+        message: "Candidate cannot update job status.",
+        description: "Job status cannot be updated with candidate only.",
+      });
     }
     let jobApplication = await JobApplication.findOne({
       where: { id: req.params.id },
       raw: true,
     });
     if (!jobApplication) {
-      return res
-        .status(404)
-        .json({
-          message: "Invalid job application id.",
-          description: "Job application cannot be found for provided job id.",
-        });
+      return res.status(404).json({
+        message: "Invalid job application id.",
+        description: "Job application cannot be found for provided job id.",
+      });
     }
     req.body.lastUpdatedBy = req.body.profile.id;
     jobApplication.status = req.body.status;
@@ -194,12 +174,10 @@ const putJobApplication = async (req, res, _) => {
     return res.json(jobApplication);
   } catch (error) {
     console.error(error.message);
-    return res
-      .status(500)
-      .json({
-        message: "Error while updating job.",
-        description: error.message,
-      });
+    return res.status(500).json({
+      message: "Error while updating job.",
+      description: error.message,
+    });
   }
 };
 
@@ -210,12 +188,10 @@ const deleteJobApplication = async (req, res, _) => {
       raw: true,
     });
     if (!jobApplication) {
-      return res
-        .status(404)
-        .json({
-          message: "Invalid job application id.",
-          description: "Job application cannot be found for provided job id.",
-        });
+      return res.status(404).json({
+        message: "Invalid job application id.",
+        description: "Job application cannot be found for provided job id.",
+      });
     }
     if (req.body.profile.roleTag === constants.ROLE_TAGS.RECRUITER) {
       jobApplication = await JobApplication.findOne({
@@ -223,13 +199,11 @@ const deleteJobApplication = async (req, res, _) => {
         raw: true,
       });
       if (!job) {
-        return res
-          .status(403)
-          .json({
-            message: "Cannot delete job application from another profile.",
-            description:
-              "Job application can only be deleted from profile you created.",
-          });
+        return res.status(403).json({
+          message: "Cannot delete job application from another profile.",
+          description:
+            "Job application can only be deleted from profile you created.",
+        });
       }
     } else if (req.body.profile.roleTag === constants.ROLE_TAGS.CANDIDATE) {
       jobApplication = await JobApplication.findOne({
@@ -237,13 +211,11 @@ const deleteJobApplication = async (req, res, _) => {
         raw: true,
       });
       if (!jobApplication) {
-        return res
-          .status(403)
-          .json({
-            message: "Cannot delete job application from another profile.",
-            description:
-              "Job application can only be deleted from profile you created.",
-          });
+        return res.status(403).json({
+          message: "Cannot delete job application from another profile.",
+          description:
+            "Job application can only be deleted from profile you created.",
+        });
       }
     }
     jobApplication = await JobApplication.destroy({
@@ -252,12 +224,10 @@ const deleteJobApplication = async (req, res, _) => {
     return res.json(jobApplication);
   } catch (error) {
     console.error(error.message);
-    return res
-      .status(500)
-      .json({
-        message: "Error while deleting job application.",
-        description: error.message,
-      });
+    return res.status(500).json({
+      message: "Error while deleting job application.",
+      description: error.message,
+    });
   }
 };
 
