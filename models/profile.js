@@ -81,7 +81,7 @@ module.exports = function (sequelize, Sequelize) {
         allowNull: true,
       },
       primarySkillIds: {
-        type: Sequelize.STRING(5000),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       secondarySkillIds: {
