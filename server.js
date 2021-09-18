@@ -70,6 +70,11 @@ const industryService = require("./services/industry");
 const industryangeRoute = require("./routes/industry")(industryService);
 app.use("/api/industry", industryangeRoute);
 
+// industry
+const jobTitleService = require("./services/jobTitle");
+const jobTitleRoute = require("./routes/jobTitle")(jobTitleService);
+app.use("/api/jobtitle", jobTitleRoute);
+
 // education
 const educationService = require("./services/education");
 const educationRoute = require("./routes/education")(educationService);
