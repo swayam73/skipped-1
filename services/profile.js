@@ -20,19 +20,6 @@ const getProfiles = async (req, res, _) => {
   }
 };
 
-const getProfileById = async (req, res, _) => {
-  try {
-    const profile = await Profile.findOne({ where: { id: req.params.id } });
-    return res.json(profile);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({
-      message: "Error while getting Profile.",
-      description: error.message,
-    });
-  }
-};
-
 const getProfile = async (req, res, _) => {
   try {
     const profile = await Profile.findOne({
@@ -118,6 +105,9 @@ const findProfiles = async (req, res, _) => {
   try {
     let profiles;
     let query = req.query;
+    if (query.id) {
+      query.id = { [Op.eq]: query.id };
+    }
     if (query.visaIds) {
       query.visaIds = { [Op.like]: query.visaIds };
     }
@@ -166,7 +156,6 @@ const findProfiles = async (req, res, _) => {
 module.exports = {
   getProfiles,
   getProfile,
-  getProfileById,
   postProfile,
   putProfile,
   deleteProfile,

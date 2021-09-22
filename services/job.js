@@ -19,21 +19,6 @@ const getJobs = async (req, res, _) => {
   }
 };
 
-const getActiveJobs = async (req, res, _) => {
-  try {
-    const ActiveJobs = await Job.findAll({
-      where: { status: 1 },
-    });
-    return res.json(ActiveJobs);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({
-      message: "Error while getting ActiveJobs.",
-      description: error.message,
-    });
-  }
-};
-
 const getJob = async (req, res, _) => {
   try {
     let job;
@@ -129,6 +114,9 @@ const findJobs = async (req, res, _) => {
   try {
     let jobs;
     let query = req.query;
+    if (query.status) {
+      query.status = { [Op.like]: query.status };
+    }
     if (req.body.profile.roleTag === constants.ROLE_TAGS.RECRUITER) {
       query.createdBy = req.body.profile.id;
       jobs = await Job.findAll({
@@ -162,7 +150,6 @@ const findJobs = async (req, res, _) => {
 module.exports = {
   getJob,
   getJobs,
-  getActiveJobs,
   postJob,
   putJob,
   deleteJob,
