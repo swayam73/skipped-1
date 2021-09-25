@@ -1,5 +1,9 @@
 const Job = require("../models").Job;
 const constants = require("../utils/constants").constants;
+const JobApplication = require("../models").JobApplication;
+
+var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 const getJobs = async (req, res, _) => {
   try {
@@ -130,7 +134,10 @@ const findJobs = async (req, res, _) => {
         attributes: ["jobId"],
         raw: true,
       });
-      query.id = { [Op.notIn]: appliedJobIds };
+      let jobIds = appliedJobIds.map((a) => {
+        return a.jobId;
+      });
+      query.id = { [Op.notIn]: jobIds };
       jobs = await Job.findAll({
         where: query,
         order: [["updatedAt", "DESC"]],

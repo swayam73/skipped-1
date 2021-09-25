@@ -6,7 +6,7 @@ const constants = require("../utils/constants");
 const sequelize = new Sequelize("skipped", "root", "root", {
   host: constants.DB_HOST,
   dialect: "mysql",
-  logging: true,
+  logging: false,
   benchmark: true,
   pool: {
     max: 50,
