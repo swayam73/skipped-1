@@ -3,7 +3,7 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const constants = require("../utils/constants");
 
-const sequelize = new Sequelize("skipped", "skipped", "Skipped10!", {
+const sequelize = new Sequelize("skipped", "skippeddbadmin", "sk123QWE", {
   host: constants.DB_HOST,
   dialect: "mysql",
   logging: false,
