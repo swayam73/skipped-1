@@ -1,5 +1,5 @@
 const constants = {
-    DB_HOST : 'skipped.crqzhthms8za.us-west-2.rds.amazonaws.com',
+    DB_HOST : 'skippeddb.cnesuhqixgmp.us-west-1.rds.amazonaws.com',
     ROLE_TAGS : {
         ADMIN : 'admin',
         RECRUITER : 'recruiter',
