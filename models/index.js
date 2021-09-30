@@ -4,7 +4,7 @@ const Sequelize = require("sequelize");
 const constants = require("../utils/constants");
 
 const sequelize = new Sequelize("skipped", "skippeddbadmin", "sk123QWE", {
-  host: constants.DB_HOST,
+  host: 'skippeddb.cnesuhqixgmp.us-west-1.rds.amazonaws.com',
   dialect: "mysql",
   logging: false,
   benchmark: true,
