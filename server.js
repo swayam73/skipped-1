@@ -87,12 +87,12 @@ const internshipDurationRoute = require("./routes/internshipDuration")(
 );
 app.use("/api/internshipduration", internshipDurationRoute);
 
-// Company Status
-const companyStatusService = require("./services/companyStatus");
-const companyStatusRoute = require("./routes/companyStatus")(
-  companyStatusService
+// Company
+const companyService = require("./services/company");
+const companyRoute = require("./routes/company")(
+  companyService
 );
-app.use("/api/companystatus", companyStatusRoute);
+app.use("/api/company", companyRoute);
 
 // visa type
 const visaTypeService = require("./services/visaType");
