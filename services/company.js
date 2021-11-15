@@ -2,8 +2,8 @@ const Company = require("../models").Company;
 
 const getCompanies = async (req, res, _) => {
   try {
-    const Company = await Company.findAll();
-    return res.json(Company);
+    const company = await Company.findAll();
+    return res.json(company);
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({
