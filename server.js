@@ -107,6 +107,11 @@ const skillService = require("./services/skill");
 const skillRoute = require("./routes/skill")(skillService);
 app.use("/api/skill", skillRoute);
 
+// Matching score
+const matchScoreService = require("./services/matchScore");
+const matchScoreRoute = require("./routes/matchScore")(matchScoreService);
+app.use("/api/matchscore", matchScoreRoute);
+
 // Status Code
 const statusCodeService = require("./services/statusCode");
 const statusCodeRoute = require("./routes/statusCode")(statusCodeService);
