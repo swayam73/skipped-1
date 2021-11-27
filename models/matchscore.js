@@ -34,6 +34,10 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.INTEGER,
             allowNull: false,
         },
+        salary: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+        },
         jobTitle: {
             type: Sequelize.INTEGER,
             allowNull: false,
