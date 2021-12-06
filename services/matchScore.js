@@ -1,4 +1,5 @@
 const MatchScore = require("../models").MatchScore;
+const constants = require("../utils/constants").constants;
 
 const getMatchScores = async (req, res, _) => {
   try {
@@ -47,7 +48,7 @@ const postMatchScore = async (req, res, _) => {
     let matchScore = await MatchScore.findOne({
       where: { profileId: req.body.profile.id },
     });
-    if(matchScore.length > 0) {
+    if (matchScore?.length > 0) {
       return res.status(400).json({
         message: "Match score already exists.",
         description: "Only 1 match score is supported per profile.",
