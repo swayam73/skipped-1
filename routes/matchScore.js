@@ -1,10 +1,11 @@
 const router = require("express").Router();
+const getProfile = require("../middlewares/getProfile");
 
 module.exports = (matchScoreService) => {
-  router.get("/", matchScoreService.getMatchScores);
-  router.post("/", matchScoreService.postMatchScore);
-  router.get("/:id", matchScoreService.getMatchScore);
-  router.put("/:id", matchScoreService.putMatchScore);
-  router.delete("/:id", matchScoreService.deleteMatchScore);
+  router.get("/", getProfile, matchScoreService.getMatchScores);
+  router.post("/", getProfile, matchScoreService.postMatchScore);
+  router.get("/:id", getProfile, matchScoreService.getMatchScore);
+  router.put("/:id", getProfile, matchScoreService.putMatchScore);
+  router.delete("/:id", getProfile, matchScoreService.deleteMatchScore);
   return router;
 };
