@@ -56,11 +56,19 @@ module.exports = function (sequelize, Sequelize) {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
+      paidAmount: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       minExperienceRequired: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       maxExperienceRequired: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      experienceRequired: {
         type: Sequelize.STRING,
         allowNull: true,
       },

@@ -87,12 +87,15 @@ const internshipDurationRoute = require("./routes/internshipDuration")(
 );
 app.use("/api/internshipduration", internshipDurationRoute);
 
-// Company Status
-const companyStatusService = require("./services/companyStatus");
-const companyStatusRoute = require("./routes/companyStatus")(
-  companyStatusService
-);
-app.use("/api/companystatus", companyStatusRoute);
+// Company
+const companyService = require("./services/company");
+const companyRoute = require("./routes/company")(companyService);
+app.use("/api/company", companyRoute);
+
+// Company Type
+const companyTypeService = require("./services/companyType");
+const companyTypeRoute = require("./routes/companyType")(companyTypeService);
+app.use("/api/companytype", companyTypeRoute);
 
 // visa type
 const visaTypeService = require("./services/visaType");
@@ -103,6 +106,11 @@ app.use("/api/visaType", visaTypeRoute);
 const skillService = require("./services/skill");
 const skillRoute = require("./routes/skill")(skillService);
 app.use("/api/skill", skillRoute);
+
+// Matching score
+const matchScoreService = require("./services/matchScore");
+const matchScoreRoute = require("./routes/matchScore")(matchScoreService);
+app.use("/api/matchscore", matchScoreRoute);
 
 // Status Code
 const statusCodeService = require("./services/statusCode");
